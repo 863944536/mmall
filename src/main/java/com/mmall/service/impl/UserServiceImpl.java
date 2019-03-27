@@ -11,8 +11,10 @@ import com.mmall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
+
 
 @Service("iUserService")
 public class UserServiceImpl implements IUserService {
@@ -61,7 +63,7 @@ public class UserServiceImpl implements IUserService {
 
     public ServerResponse<String> checkValid(String str,String type){
         //isBlank()与isEmpty的区别，前者对空格符也会默认是空字符串，后者不会
-        if(StringUtils.isBlank(type)){
+        if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
             //开始校验
             if(Const.USERNAEM.equals(type)){
                 int resultCount = userMapper.checkUsername(str);
@@ -70,7 +72,7 @@ public class UserServiceImpl implements IUserService {
                 }
             }
             if(Const.EMAIL.equals(type)){
-                int resultCount1 = userMapper.checkUsername(str);
+                int resultCount1 = userMapper.checkEmail(str);
                 if(resultCount1 > 0){
                     return ServerResponse.createByErrorMessage("邮箱已存在");
                 }
@@ -87,7 +89,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String question = userMapper.selectQuestionByUsername(username);
-        if(StringUtils.isBlank(question)){
+        if(StringUtils.isNotBlank(question)){
             return ServerResponse.createBySuccess(question);
         }
         return ServerResponse.createByErrorMessage("找回密码的问题是空的");
