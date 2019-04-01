@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * 用户模块
  */
 @Controller
-@RequestMapping("/manage/user")
+@RequestMapping("/manage/user/")
 public class UserManageController {
 
     @Autowired

@@ -11,7 +11,6 @@ import com.mmall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -35,7 +34,6 @@ public class UserServiceImpl implements IUserService {
         if(user==null){
             return ServerResponse.createByErrorMessage("用户密码错误");
         }
-
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess("登录成功",user);
     }
