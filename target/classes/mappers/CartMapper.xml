@@ -152,7 +152,6 @@
   </delete>
 
 
-
   <update id="checkedOrUncheckedProduct" parameterType="map">
     UPDATE  mmall_cart
     set checked = #{checked},

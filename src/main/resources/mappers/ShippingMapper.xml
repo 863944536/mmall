@@ -210,12 +210,12 @@
   </select>
 
 
-  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
-    SELECT
-    <include refid="Base_Column_List"/>
-    from mmall_shipping
-    where user_id = #{userId}
-  </select>
+<select id="selectByUserId" parameterType="map" resultMap="BaseResultMap">
+  SELECT
+  <include refid="Base_Column_List"/>
+  from mmall_shipping
+  where user_id = #{userId}
+</select>
 
 
 
