@@ -95,7 +95,7 @@ public class OrderServiceImpl implements IOrderService {
 
         // 商品明细列表，需填写购买商品详细信息，
         List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
-        List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(order.getOrderNo(), userId);
+        List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(orderNo, userId);
         for (OrderItem orderItem : orderItemList) {
             GoodsDetail goods1 = GoodsDetail.newInstance(orderItem.getProductId().toString(), orderItem.getProductName(),
                     BigDecimalUtil.mul(orderItem.getCurrentUnitPrice().doubleValue(), new Double(100).doubleValue()).longValue(),
@@ -138,8 +138,8 @@ public class OrderServiceImpl implements IOrderService {
 
                 // 需要修改为运行机器上的路径
                 //细节前面要加“/”
-                String qrPath = String.format(path+"/qr-%s.png", response.getOutTradeNo());
-                String qrFileName = String.format("/qr-%s.png",response.getOutTradeNo());
+                String qrPath = String.format(path+File.separator+"qr-%s.png", response.getOutTradeNo());
+                String qrFileName = String.format("qr-%s.png",response.getOutTradeNo());
                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
 
                 File targetFile = new File(path,qrFileName);
@@ -149,7 +149,7 @@ public class OrderServiceImpl implements IOrderService {
                     log.error("上传二维码异常",e);
                 }
                 log.info("qrPath:" + qrPath);
-                String qrUrl = PropertiesUtil.getProperty("ftp.server.http.prefix");
+                String qrUrl = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFile.getName();
                 resultMap.put("qrUrl",qrUrl);
                 return ServerResponse.createBySuccess(resultMap);
             case FAILED:
