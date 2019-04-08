@@ -3,6 +3,7 @@ package com.mmall.service.impl;
 import com.google.common.collect.Lists;
 import com.mmall.service.IFileService;
 import com.mmall.util.FTPUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,9 @@ import java.util.UUID;
 
 
 @Service("iFileService")
+@Slf4j
 public class FileServiceImpl implements IFileService {
 
-    private Logger log = LoggerFactory.getLogger(FileServiceImpl.class);
 
     public String upload(MultipartFile file,String path){
         String fileName = file.getOriginalFilename();

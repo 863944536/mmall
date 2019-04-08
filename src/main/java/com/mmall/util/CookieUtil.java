@@ -9,12 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+@Slf4j
 public class CookieUtil {
 
     private final static String COOKIE_DOMAIN = ".happymmall.com";
     private final static String COOKIE_NAME = "mmall_login_token";
-    private final static Logger log = LoggerFactory.getLogger(CookieUtil.class);
 
 
     public static String readLoginToken(HttpServletRequest request){
