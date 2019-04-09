@@ -20,7 +20,7 @@
     <task:annotation-driven/>
 
 
-
+    <import resource="applicationContext-spring-session.xml"/>
     <import resource="applicationContext-datasource.xml"/>
 
 </beans>

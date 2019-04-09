@@ -4,9 +4,7 @@ import com.mmall.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.ShardedJedis;
 
-/**
- * Created by geely
- */
+
 @Slf4j
 public class RedisShardedPoolUtil {
 
@@ -129,18 +127,18 @@ public class RedisShardedPoolUtil {
     public static void main(String[] args) {
         ShardedJedis jedis = RedisShardedPool.getJedis();
 
-        RedisPoolUtil.set("keyTest","value");
+        RedisShardedPoolUtil.set("keyTest","value");
 
-        String value = RedisPoolUtil.get("keyTest");
+        String value = RedisShardedPoolUtil.get("keyTest");
 
-        RedisPoolUtil.setEx("keyex","valueex",60*10);
+        RedisShardedPoolUtil.setEx("keyex","valueex",60*10);
 
-        RedisPoolUtil.expire("keyTest",60*20);
+        RedisShardedPoolUtil.expire("keyTest",60*20);
 
-        RedisPoolUtil.del("keyTest");
+        RedisShardedPoolUtil.del("keyTest");
 
 
-        String aaa = RedisPoolUtil.get(null);
+        String aaa = RedisShardedPoolUtil.get(null);
         System.out.println(aaa);
 
         System.out.println("end");
