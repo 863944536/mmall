@@ -1,6 +1,7 @@
 package com.mmall.common;
 
 import com.google.common.collect.Sets;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 import java.util.Set;
 
@@ -135,6 +136,10 @@ public class Const {
             }
             throw new RuntimeException("没有找到对应的枚举");
         }
+    }
+
+    public interface REDIS_LOCK{
+        String CLOSE_ORDER_TASK_LOCK = "CLOSE_ORDER_TASK_LOCK";//关闭订单的分布式锁
     }
 
 
