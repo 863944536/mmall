@@ -36,7 +36,7 @@ public class UserSpringSessionController {
      * @param session
      * @return
      */
-    @RequestMapping(value = "login.do",method = RequestMethod.GET)
+    @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session,HttpServletResponse httpServletResponse){
         ServerResponse<User> response = iUserService.login(username, password);
@@ -54,7 +54,7 @@ public class UserSpringSessionController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "logout.do",method = RequestMethod.GET)
+    @RequestMapping(value = "logout.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 //        String loginToken = CookieUtil.readLoginToken(request);
@@ -69,7 +69,7 @@ public class UserSpringSessionController {
      * @param httpServletRequest
      * @return
      */
-    @RequestMapping(value = "get_user_info.do",method = RequestMethod.GET)
+    @RequestMapping(value = "get_user_info.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest,HttpSession session){
         User user = (User) session.getAttribute(Const.CURRENT_USER);

@@ -49,7 +49,7 @@ public class CloseOrderTask {
     /**
      * 多重分布式防死锁
      */
-//    @Scheduled(cron = "0 */1 * * * ?")//每个一分钟的整数倍执行一次
+    @Scheduled(cron = "0 */1 * * * ?")//每个一分钟的整数倍执行一次
     public void closeOrderTaskV3() {
         log.info("关闭订单任务启动");
         long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("lock.timeout","5000"));
@@ -79,12 +79,12 @@ public class CloseOrderTask {
         log.info("关闭订单任务结束");
     }
 
-    @Scheduled(cron = "0 */1 * * * ?")//每个一分钟的整数倍执行一次
+//    @Scheduled(cron = "0 */1 * * * ?")//每个一分钟的整数倍执行一次
     public void closeOrderTaskV4(){
         RLock lock = redissonManage.getRedisson().getLock(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
         boolean getlock =false;
         try {
-            if(getlock = lock.tryLock(2,5, TimeUnit.SECONDS)){
+            if(getlock = lock.tryLock(0,50, TimeUnit.SECONDS)){
                 log.info("Redisson获取到分布式锁:{},ThreadName:{}",Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK,Thread.currentThread().getName());
                 int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time","2"));
 //                iOrderService.closeOrder(hour);
