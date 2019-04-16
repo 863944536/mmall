@@ -1,0 +1,22 @@
+upstream abb.natapp1.cc{
+	#server abb.natapp1.cc:8080 weight=1;
+	#server abb.natapp1.cc:9080 weight=1;
+	server abb.natapp1.cc:8080 weight=1;
+	server abb.natapp1.cc:9080 weight=1;
+}
+
+server{
+    listen 80;
+    autoindex on;
+    server_name www.imooc.com
+    access_log D:\backendUtil\nginx-1.10.2\logs\access.log combined;
+    index index.thml index.htm index.jsp index.php;
+    #error_page 404 /404.html;
+    if ( $query_string ~* ".*[\;'\<\>].*" ){	
+	return 404;
+    }
+    location / {
+	proxy_pass http://abb.natapp1.cc;
+	add_header Access-Control-Allow-Oringin *;
+    }
+}

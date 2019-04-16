@@ -1,0 +1,4 @@
+windows:将conf文件复制到reids集群的1.2的文件夹中，然后以 redis-server redis.windows1.conf和redis-server redis.windows2.conf
+		启动多台redis服务器.通过redis-cli -p 6379  / redis-cli -p 6380进入对应redis客户端。
+mac:我没有apple，我也不知道怎么办。
+Linux:复制文件到住目录下 cd /你自己的reids路径/bin   -->  ./redis-server ../redis.windows.conf
